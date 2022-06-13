@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body onload="main()">
+<img src="" id="val" style="width: 100%; height: 100%;">
+<script>
+    function main() {
+        var queryStr = parseQueryString(window.location.search);
+        var link = queryStr['link'] + "";
+        link = link.replace("%3A", ":");
+        link = link.replaceAll("%2F", "/");
+        link = link.replaceAll("%3F", "?");
+        link = link.replaceAll("%26", "&");
+        link = link.replaceAll("%3D", "=");
+        link = link.replaceAll("%22", "");
+        document.getElementById("val").src = link;
+    }
+
+    var parseQueryString = function (strQuery) {
+        var strSearch   = strQuery.substr(1),
+            strPattern  = /([^=]+)=([^&]+)&?/ig,
+            arrMatch    = strPattern.exec(strSearch),
+            objRes      = {};
+        while (arrMatch != null) {
+            objRes[arrMatch[1]] = arrMatch[2];
+            arrMatch = strPattern.exec(strSearch);
+        }
+        return objRes;
+    };
+</script>
+</body>
+</html>
